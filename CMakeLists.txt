@@ -26,16 +26,17 @@ add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE include)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${LIB_PROJECT})
 
-# Setup GTest
-# enable_testing()
-# find_package(GTest CONFIG REQUIRED)
-# include(GoogleTest)
+# Setup Catch2
+enable_testing()
+find_package(Catch2 CONFIG REQUIRED)
+include(CTest)
+include(Catch)
 
-# # Add test project
-# set(TEST_PROJECT ${CMAKE_PROJECT_NAME}_TEST)
-# add_executable(${TEST_PROJECT} test/test_main.cpp test/test_example.cpp)
-# target_include_directories(${TEST_PROJECT} PRIVATE include)
-# target_link_libraries(${TEST_PROJECT} PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main ${LIB_PROJECT})
+# Add test project
+set(TEST_PROJECT ${CMAKE_PROJECT_NAME}_TEST)
+add_executable(${TEST_PROJECT} tests/test_main.cpp tests/test_example.cpp)
+target_include_directories(${TEST_PROJECT} PRIVATE include)
+target_link_libraries(${TEST_PROJECT} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${LIB_PROJECT})
 
-# # Automatically discover and add tests
-# gtest_discover_tests(${TEST_PROJECT})
+# Automatically discover and add tests
+catch_discover_tests(${TEST_PROJECT})
