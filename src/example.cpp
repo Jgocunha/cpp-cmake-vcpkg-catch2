@@ -3,14 +3,12 @@
 #include <stdexcept>
 
 Person::Person(std::string name, int age)
+	:_name(std::move(name)), _age(age)
 {
-    if (age < 0)
+    if (_age < 0)
     {
         throw std::invalid_argument("Age needs to be a non-negative integer");
     }
-
-    _name = name;
-    _age = age;
 }
 
 std::string Person::getName() const
