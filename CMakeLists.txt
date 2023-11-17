@@ -26,8 +26,6 @@ add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE include)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${LIB_PROJECT})
 
-#find_package(profiling-tools)
-
 # Setup Catch2
 enable_testing()
 find_package(Catch2 CONFIG REQUIRED)
